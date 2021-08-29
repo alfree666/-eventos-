@@ -6,7 +6,7 @@ services:
     container_name: node-mysql
     build: .
     ports:
-      - "8700:3000"
+      - "8080:3000"
     links:
       - mysql
     depends_on:
