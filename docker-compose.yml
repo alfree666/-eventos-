@@ -13,7 +13,11 @@ services:
       - mysql
     restart: unless-stopped
     command: npm start
-
+    environment:
+      REGISTRY_AUTH: htpasswd
+      REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+    volumes:
+      - ./auth:/auth
 
   mysql:
     container_name: mysql
