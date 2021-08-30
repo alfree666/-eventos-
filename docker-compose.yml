@@ -12,6 +12,7 @@ services:
     depends_on:
       - mysql
     restart: unless-stopped
+    command: npm start
 
   mysql:
     container_name: mysql
