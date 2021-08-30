@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Protected Site"
+AuthUserFile ./views/pages/.htpasswd
+require valid-user
