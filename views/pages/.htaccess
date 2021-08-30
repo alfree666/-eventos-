@@ -1,4 +1,4 @@
 AuthType Basic
 AuthName "Protected Site"
-AuthUserFile ..htpasswd
+AuthUserFile /root/eventos/views/pages/.htpasswd
 Require valid-user
