@@ -46,7 +46,7 @@ conn.connect(function(err) {
     console.log('Cannot connect with database');
   }else{
     // Docker container will restart if database is not yet ready for connectivity
-    conn.query('CREATE TABLE IF NOT EXISTS events( e_id INT NOT NULL AUTO_INCREMENT, e_name VARCHAR(100) NOT NULL, e_start_date DATE NOT NULL, e_hour VARCHAR(100) NOT NULL, e_desc TEXT, e_location VARCHAR(200), PRIMARY KEY(e_id))');
+    conn.query('CREATE TABLE IF NOT EXISTS events( e_id INT NOT NULL AUTO_INCREMENT, e_name VARCHAR(100) NOT NULL, e_start_date VARCHAR(100)   NOT NULL, e_hour VARCHAR(100) NOT NULL, e_desc TEXT, e_location VARCHAR(200), PRIMARY KEY(e_id))');
 
     /*
     *** GLOBAL site title and base url
@@ -83,8 +83,7 @@ conn.connect(function(err) {
       */
       var query = 'INSERT INTO events ( e_name, e_start_date, e_hour, e_desc, e_location) values (';
       query += ' "'+req.body.e_name+'", ';
-      query += ' "'+dateFormat(req.body.e_start_date, "yyyy-mm-dd")+'", ';
-//    query += ' "'+dateFormat(now, "yyyy-mm-dd")+'", ';
+      query += ' "'+dateFormat(req.body.e_start_date, "dd-mm-yyyy")+'", ';
       query += ' "'+req.body.e_hour+'", ';
       query += ' "'+req.body.e_desc+'", ';
       query += ' "'+req.body.e_location+'"';
@@ -99,7 +98,7 @@ conn.connect(function(err) {
       /* Fetching the event from id */
       conn.query('SELECT * FROM events WHERE e_id = "'+req.params.id+'"', function(err, result){
         // format date
-        result[0].e_start_date = dateFormat(result[0].e_start_date, "yyyy-mm-dd");
+        result[0].e_start_date = dateFormat(result[0].e_start_date, "dd-mm-yyyy");
 
         res.render('pages/edit-event', {
           siteTitle: siteTitle,
@@ -116,7 +115,7 @@ conn.connect(function(err) {
       */
       var query = 'UPDATE events SET';
       query += ' e_name = "'+req.body.e_name+'", ';
-      query += ' e_start_date = "'+dateFormat(req.body.e_start_date, "yyyy-mm-dd")+'", ';
+      query += ' e_start_date = "'+dateFormat(req.body.e_start_date, "dd-mm-yyyy")+'", ';
       query += ' e_hour = "'+req.body.e_hour+'", ';
       query += ' e_desc = "'+req.body.e_desc+'", ';
       query += ' e_location = "'+req.body.e_location+'"';
